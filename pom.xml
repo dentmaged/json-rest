@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>rip.bolt</groupId>
+	<artifactId>json-rest</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>JSON Rest</name>
+	<description>Library to interact with Bolt API</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20190722</version>
+		</dependency>
+	</dependencies>
+
+	<scm>
+		<connection>scm:git:git://github.com/bolt-rip/json-rest.git</connection>
+		<developerConnection>scm:git:git@github.com:bolt-rip/json-rest.git</developerConnection>
+		<url>https://github.com/bolt-rip/json-rest</url>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>bolt-rip-public</id>
+			<url>https://repo.repsy.io/mvn/boltrip/public</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>org.json:json</include>
+								</includes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+</project>
